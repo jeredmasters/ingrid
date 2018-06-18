@@ -9,10 +9,10 @@ namespace Ingrid.Agent
 {
     class MiniMax
     {
-        public static Move GetBestMove(GameState state, Team forPlayer, int depth = 2)
+        public static Move GetBestMove(GameState state, Team forPlayer, ref long evals, int depth = 2)
         {
             depth--;
-            int bestHeuristic = 0;
+            float bestHeuristic = 0;
             Move bestMove = null;
             for (int x = 0; x < 8; x++)
             {
@@ -26,13 +26,13 @@ namespace Ingrid.Agent
                         foreach (var m in moves)
                         {
                             var newstate = state.Clone();
-                            newstate.MovePiece(piece, p, m);
+                            newstate.ForceMovePiece(piece, m);
                             if (depth > 0)
                             {
-                                var otherMove = GetBestMove(newstate, OtherPlayer(forPlayer), depth);
+                                var otherMove = GetBestMove(newstate, OtherPlayer(forPlayer), ref evals, depth);
                                 newstate.MovePiece(otherMove.Piece, otherMove.From, otherMove.To);
                             }
-                            int h = Heuristic.GetHeuristic(newstate, forPlayer);
+                            float h = Heuristic.GetHeuristic(newstate, forPlayer, ref evals);
                             if (h > bestHeuristic || bestMove == null)
                             {
                                 bestHeuristic = h;

@@ -127,6 +127,47 @@ namespace Ingrid.Board
                 _playerTurn = Team.Black;
             }
         }
+        public Position Find(IPiece piece)
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    if (piece == At(x, y))
+                    {
+                        return new Position(x, y);
+                    }
+                }
+            }
+            return null;
+        }
+        public void ForceMovePiece(IPiece piece, Position to)
+        {
+            Position from = Find(piece);
+            if (from == null)
+            {
+                throw new Exception("Piece not on board");
+            }
+            
+            var takePiece = At(to);
+            if (takePiece != null)
+            {
+                _takenPieces.Add(takePiece);
+            }
+
+            _board[to.X, to.Y].Piece = _board[from.X, from.Y].Piece;
+            _board[from.X, from.Y].Piece = null;
+
+
+            if (_playerTurn == Team.Black)
+            {
+                _playerTurn = Team.White;
+            }
+            else
+            {
+                _playerTurn = Team.Black;
+            }
+        }
         public GameState Clone()
         {
             var newboard = new SquareState[8, 8];

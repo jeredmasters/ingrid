@@ -11,8 +11,9 @@ namespace Ingrid.Agent
     {
         public static Move GetBestMove(GameState state, Team forPlayer)
         {
-            int bestHeuristic = 0;
+            float bestHeuristic = 0;
             Move bestMove = null;
+            long evals = 0;
             for (int x = 0; x < 8; x++)
             {
                 for (int y = 0; y < 8; y++)
@@ -26,7 +27,7 @@ namespace Ingrid.Agent
                         {
                             var newstate = state.Clone();
                             newstate.MovePiece(piece, p, m);
-                            int h = Heuristic.GetHeuristic(newstate, forPlayer);
+                            float h = Heuristic.GetHeuristic(newstate, forPlayer, ref evals);
                             if (h > bestHeuristic || bestMove == null)
                             {
                                 bestHeuristic = h;

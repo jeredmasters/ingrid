@@ -10,14 +10,24 @@ namespace Ingrid.Board
     class Piece
     {
         protected Team _team;
+        protected Guid _id;
         public Piece(Team team)
         {
             _team = team;
+            _id = Guid.NewGuid();
         }
 
         public Team Team()
         {
             return _team;
+        }
+
+        public Guid ID
+        {
+            get
+            {
+                return _id;
+            }
         }
 
         public virtual bool CanMove(Position from, Position to, GameState state)
@@ -61,6 +71,16 @@ namespace Ingrid.Board
         {
             var piece = state.At(x, y);
             return (piece == null || piece.Team() != _team);
+        }
+
+        public static bool operator ==(Piece a, Piece b)
+        {
+            return a.ID == b.ID;
+        }
+        
+        public static bool operator !=(Piece a, Piece b)
+        {
+            return a.ID != b.ID;
         }
 
         public enum Type

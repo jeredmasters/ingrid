@@ -23,13 +23,27 @@ namespace Ingrid
         GameState _gameState;
         Rectangle[,] _imageSquares;
         Rectangle[,] _colorSquares;
-
+        System.Windows.Threading.DispatcherTimer _timer;
+        long _totalEvals;
 
         public MainWindow()
         {
             InitializeComponent();
             _gameState = new GameState();
             drawSquares();
+
+            _timer = new System.Windows.Threading.DispatcherTimer();
+            _timer.Tick += _timer_Tick;
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            
+        }
+
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            if (_gameState.PlayerTurn == Team.Black)
+            {
+                TakeAiTurn(_gameState.PlayerTurn);
+            }
         }
 
         private Brush getSquareFill(int x, int y)
@@ -127,8 +141,10 @@ namespace Ingrid
 
         private void btnNewGame_Click(object sender, RoutedEventArgs e)
         {
+            _totalEvals = 0;
             _gameState.Initialize();
             render();
+            _timer.Start();
         }
 
         private void render()
@@ -162,15 +178,14 @@ namespace Ingrid
             }
             lblPlayerTurn.Content = _gameState.PlayerTurn.ToString();
             //lblWhiteHeuristic.Content = Agent.Heuristic.GetHeuristic(_gameState, Team.White);
-
-            if (_gameState.PlayerTurn == Team.Black)
-            {
-                TakeAiTurn();
-            }
+            lblWhiteHeuristic.Content = _totalEvals;
+            
         }
-        private void TakeAiTurn()
+        private void TakeAiTurn(Team player)
         {
-            var bestMove = Agent.MiniMax.GetBestMove(_gameState, Team.Black);
+            long evals = 0;
+            var bestMove = Agent.MiniMaxBeam.GetBestMove(_gameState, player, 20, ref evals, 3);
+            _totalEvals += evals;
             _gameState.MovePiece(bestMove.Piece, bestMove.From, bestMove.To);
             render();
         }

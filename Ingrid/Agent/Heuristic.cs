@@ -8,7 +8,7 @@ namespace Ingrid.Agent
 {
     class Heuristic
     {
-        public static int GetHeuristic(GameState state, Team forPlayer)
+        public static float GetHeuristic(GameState state, Team forPlayer, ref long evals)
         {
             float pointsFor = 0;
             float pointsAgainst = 0;
@@ -23,21 +23,22 @@ namespace Ingrid.Agent
                         var moves = piece.AllowedMoves(p, state);
                         foreach (var m in moves)
                         {
+                            evals++;
                             var enemyPiece = state.At(m);
                             if (enemyPiece != null)
                             {
                                 if (piece.Team() == forPlayer)
                                 {
-                                    pointsFor += ((float)enemyPiece.Value()) / 3;
+                                    pointsFor += ((float)enemyPiece.Value()) / 4;
                                 }
                                 else
                                 {
-                                    pointsAgainst += ((float)enemyPiece.Value()) / 3;
+                                    pointsAgainst += ((float)enemyPiece.Value()) / 4;
                                 }
                             }
-                            if (piece.Team() == forPlayer && piece.Type() != Piece.Type.King)
+                            if (piece.Team() == forPlayer && piece.Type() != Piece.Type.King && (m.Y == 3 || m.Y ==4))
                             {
-                                pointsFor += (float)Math.Abs((float)m.Y - 3.5) * (float)piece.Value() / 10;
+                                pointsFor += (float)piece.Value() / 10;
                             }
                         }
                         
@@ -55,7 +56,7 @@ namespace Ingrid.Agent
                     pointsFor += ((float)piece.Value());
                 }
             }
-            return (int)(pointsFor - pointsAgainst);
+            return (pointsFor - pointsAgainst);
         }
     }
 }

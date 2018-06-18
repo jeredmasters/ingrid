@@ -11,12 +11,16 @@ namespace Ingrid.Board
         IPiece _piece;
         Position _from;
         Position _to;
+        float _heuristic;
+        long _evals;
 
-        public Move(IPiece piece, Position from, Position to)
+        public Move(IPiece piece, Position from, Position to, float heuristic = 0, long evals = 0)
         {
             _piece = piece;
             _from = from;
             _to = to;
+            _heuristic = heuristic;
+            _evals = evals;
         }
 
         public IPiece Piece
@@ -40,6 +44,18 @@ namespace Ingrid.Board
             get
             {
                 return _to;
+            }
+        }
+
+        public float Heuristic
+        {
+            get
+            {
+                return _heuristic;
+            }
+            set
+            {
+                _heuristic = value;
             }
         }
     }
