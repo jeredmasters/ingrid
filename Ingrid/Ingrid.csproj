@@ -58,10 +58,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Agent\Heuristic.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Board\Direction.cs" />
+    <Compile Include="Board\GameState.cs" />
+    <Compile Include="Board\Piece.cs" />
+    <Compile Include="Board\Move.cs" />
+    <Compile Include="Board\IPiece.cs" />
+    <Compile Include="Board\Pieces\King.cs" />
+    <Compile Include="Board\Pieces\Queen.cs" />
+    <Compile Include="Board\Pieces\Rook.cs" />
+    <Compile Include="Board\Pieces\Bishop.cs" />
+    <Compile Include="Board\Pieces\Knight.cs" />
+    <Compile Include="Board\Pieces\Pawn.cs" />
+    <Compile Include="Board\SquareState.cs" />
+    <Compile Include="Board\Position.cs" />
+    <Compile Include="Board\Team.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -92,6 +107,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\black_bishop.png" />
+    <Resource Include="images\black_king.png" />
+    <Resource Include="images\black_knight.png" />
+    <Resource Include="images\black_pawn.png" />
+    <Resource Include="images\black_queen.png" />
+    <Resource Include="images\black_rook.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\white_bishop.png" />
+    <Resource Include="images\white_king.png" />
+    <Resource Include="images\white_knight.png" />
+    <Resource Include="images\white_pawn.png" />
+    <Resource Include="images\white_queen.png" />
+    <Resource Include="images\white_rook.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

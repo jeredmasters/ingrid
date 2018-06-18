@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ingrid"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="529.411" Width="615.196">
     <Grid>
-        
+        <Grid x:Name="gridBoard" Margin="10,10,119,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button x:Name="btnNewGame" Content="New Game" HorizontalAlignment="Left" Height="38" Margin="503,19,0,0" VerticalAlignment="Top" Width="84" Click="btnNewGame_Click"/>
+        <Label Content="Player Turn:" HorizontalAlignment="Left" Margin="503,83,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPlayerTurn" Content="__" HorizontalAlignment="Left" Margin="503,114,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblWhiteHeuristic" Content="Label" HorizontalAlignment="Left" Margin="521,450,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
