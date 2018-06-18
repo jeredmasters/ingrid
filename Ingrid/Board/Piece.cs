@@ -62,5 +62,15 @@ namespace Ingrid.Board
             var piece = state.At(x, y);
             return (piece == null || piece.Team() != _team);
         }
+
+        public enum Type
+        {
+            King,
+            Queen,
+            Rook,
+            Knight,
+            Bishop,
+            Pawn
+        }
     }
 }

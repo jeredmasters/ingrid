@@ -35,7 +35,12 @@ namespace Ingrid.Agent
                                     pointsAgainst += ((float)enemyPiece.Value()) / 3;
                                 }
                             }
+                            if (piece.Team() == forPlayer && piece.Type() != Piece.Type.King)
+                            {
+                                pointsFor += (float)Math.Abs((float)m.Y - 3.5) * (float)piece.Value() / 10;
+                            }
                         }
+                        
                     }                    
                 }
             }

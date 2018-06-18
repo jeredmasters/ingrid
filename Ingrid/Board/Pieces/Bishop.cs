@@ -24,6 +24,11 @@ namespace Ingrid.Board.Pieces
             return 3;
         }
 
+        public Piece.Type Type()
+        {
+            return Piece.Type.Bishop;
+        }
+
         public override bool CanMove(Position from, Position to, GameState state)
         {
             int dX = Math.Abs(from.X - to.X);

@@ -25,6 +25,11 @@ namespace Ingrid.Board.Pieces
             return 1;
         }
 
+        public Piece.Type Type()
+        {
+            return Piece.Type.Pawn;
+        }
+
         public override bool CanMove(Position from, Position to, GameState state)
         {
             if (_direction == Direction.Down && from.Y > to.Y)

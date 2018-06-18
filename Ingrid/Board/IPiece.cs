@@ -13,5 +13,6 @@ namespace Ingrid.Board
         bool CanMove(Position from, Position to, GameState state);
         Team Team();
         int Value();
+        Piece.Type Type();
     }
 }
