@@ -170,7 +170,7 @@ namespace Ingrid
         }
         private void TakeAiTurn()
         {
-            var bestMove = Agent.Heuristic.GetBestMove(_gameState, Team.Black);
+            var bestMove = Agent.MiniMax.GetBestMove(_gameState, Team.Black);
             _gameState.MovePiece(bestMove.Piece, bestMove.From, bestMove.To);
             render();
         }
